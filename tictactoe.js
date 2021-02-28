@@ -1,28 +1,42 @@
+//setup
 var player1 = true
 var draw = false
+var sound = document.querySelector("audio")
+var grid = document.querySelector(".grid")
+var gridItems = document.querySelectorAll(".grid-item")
+for(item of gridItems){
+    item.addEventListener("click", function(){
+        gridClicked(this)
+    })
+}
+var endMenu = document.querySelector(".end")
+var endText = document.querySelector(".end-text")
 localStorage.setItem("count", 0)
 
-function gridClicked(row,column){
-    if(document.getElementById(row+column).innerHTML == ""){
+function gridClicked(gridItem){
+    if(gridItem.innerHTML == ""){
         if(player1){
-            document.getElementById(row+""+column).innerHTML = "X"
-            document.getElementById(row+column).style.color = "rgb(100, 100, 100)"
+            gridItem.innerHTML = "X"
+            gridItem.style.color = "rgb(100, 100, 100)"
             player1 = false
 
         }
         else{
-            document.getElementById(row+""+column).innerHTML = "O"
-            document.getElementById(row+column).style.color = "rgb(65, 65, 65)"
+            gridItem.innerHTML = "O"
+            gridItem.style.color = "rgb(65, 65, 65)"
             player1 = true
         }
-
-        document.getElementById(row+column).style.fontSize = "10rem"
-        document.getElementById(row+column).style.transition = "font-size 0.2s"
+        sound.play()
+        gridItem.style.fontSize = "10rem"
+        gridItem.style.transition = "font-size 0.2s"
 
         var count = localStorage.getItem("count") 
         localStorage.setItem("count", ++count)
 
     }
+    row = gridItem.id.charAt(1)
+    column = gridItem.id.charAt(0)
+    console.log("ID: " + row + ", " + column)
     array = generateGrid()
     checkIfWon(row,column,array)
 }
@@ -32,11 +46,12 @@ function generateGrid(){
     for (let i = 0; i < 3; i++){
         temp = []
         for (let x = 0; x < 3; x++){
-            temp.push(document.getElementById(i+""+x).innerHTML)
+            temp.push(document.getElementById(x+""+i).innerHTML)
         }
         array.push(temp)
     }
-    ////console.log(array)
+    console.log("ARRAY:")
+    console.log(array)
     return array
 }
 function checkIfWon(row,column,array){
@@ -55,7 +70,7 @@ function checkIfWon(row,column,array){
 
     if (rowCheck == true){
         //console.log("row win")
-        document.getElementById("grid").style.pointerEvents = "none"
+        grid.style.pointerEvents = "none"
         end()
         return
     }
@@ -74,7 +89,7 @@ function checkIfWon(row,column,array){
     
     if (columnCheck == true){
         //console.log("column win")
-        document.getElementById("grid").style.pointerEvents = "none"
+        grid.style.pointerEvents = "none"
         end()
         return
     }
@@ -89,7 +104,7 @@ function checkIfWon(row,column,array){
 
     if (diagonalCheck == true){
         //console.log("left diag win")
-        document.getElementById("grid").style.pointerEvents = "none"
+        grid.style.pointerEvents = "none"
         end()
         return
     }
@@ -107,14 +122,14 @@ function checkIfWon(row,column,array){
     }
     if (diagonalCheck == true){
         //console.log("right diag win")
-        document.getElementById("grid").style.pointerEvents = "none"
+        grid.style.pointerEvents = "none"
         end()
         return
     }
 
     //check for draw
     if(localStorage.getItem("count") == 9){
-        document.getElementById("grid").style.pointerEvents = "none"
+        grid.style.pointerEvents = "none"
         //console.log("DRaw")
         draw = true
         end()
@@ -135,18 +150,18 @@ function end(){
             text = "Player 1 Wins"
         }
     }
-    document.getElementById("end-text").innerHTML = text
-    document.getElementById("end").style.visibility = "visible"
-    document.getElementById("end").style.transform = "scale(1)"
-    document.getElementById("end").style.transition = "all 1s"
+    endText.innerHTML = text
+    endMenu.style.visibility = "visible"
+    endMenu.style.transform = "scale(1)"
+    endMenu.style.transition = "all 1s"
 }
 
 function resetGrid(){
     player1 = true
     draw = false
     localStorage.setItem("count", 0)
-    document.getElementById("end").style.transform = "scale(0)"
-    document.getElementById("end").style.transition = "all 0.25s"
+    endMenu.style.transform = "scale(0)"
+    endMenu.style.transition = "all 0.25s"
     for (let i = 0; i < array.length; i++){
         for (let x = 0; x < array.length; x++){
             id = i+""+x
@@ -155,5 +170,5 @@ function resetGrid(){
             document.getElementById(id).style.transition = "font-size 0.2s"
         }
     }
-    document.getElementById("grid").style.pointerEvents = "all"
+    grid.style.pointerEvents = "all"
 }
