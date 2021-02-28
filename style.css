@@ -27,7 +27,7 @@ input:focus{
     width: 45rem;
     height: 45rem;
     margin: 1rem;
-    margin-top: 5%;
+    margin-top: 7rem;
     display: grid;
     grid-template-columns: auto auto auto;
     font-weight: bold;

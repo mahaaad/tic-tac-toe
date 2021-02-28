@@ -143,6 +143,7 @@ function end(){
 
 function resetGrid(){
     player1 = true
+    draw = false
     localStorage.setItem("count", 0)
     document.getElementById("end").style.transform = "scale(0)"
     document.getElementById("end").style.transition = "all 0.25s"
