@@ -37,13 +37,15 @@ function gridClicked(gridItem){
 
         var count = localStorage.getItem("count") 
         localStorage.setItem("count", ++count)
+        
+        row = gridItem.id.charAt(1)
+        column = gridItem.id.charAt(0)
+        console.log("ID: " + row + ", " + column)
+        array = generateGrid()
+        checkIfWon(row,column,array)
 
     }
-    row = gridItem.id.charAt(1)
-    column = gridItem.id.charAt(0)
-    console.log("ID: " + row + ", " + column)
-    array = generateGrid()
-    checkIfWon(row,column,array)
+
 }
 
 function generateGrid(){

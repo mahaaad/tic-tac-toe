@@ -9,20 +9,58 @@ body{
     justify-content: center;
     align-items: center;
 }
-.buttons{
+.resetButton{
     position: absolute;
     bottom: 2rem;
-    right: 2rem;
-    height: 5rem;
-}
-input{
+    right: 4rem;
     width: 4rem;
     height: 4rem;
-    padding: 1rem;
-    opacity: 0.5;
+    opacity: 1;
+    background-image: url("reset.png");
+    background-size: 100%;
+    cursor: pointer;
 }
-input:focus{
-    outline: none;
+.resetButton::before,
+.resetButton::after{
+    --tooltip-color: rgb(65, 65, 65);
+}
+/*tool tip box*/
+.resetButton::before{
+    content: attr(data-tooltip);
+    text-align: center;
+    position: absolute;
+    top: -5.25rem;
+    left: 50%;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 5px;
+    /* TRANSLATE X */
+    transform: translateX(-50%) scale(0);
+    transform-origin: bottom center;
+    transition: all 0.2s;
+    color: white;
+    background-color: var(--tooltip-color);
+}
+.resetButton:hover::before,
+.resetButton:hover::after{
+    transform: translate(-50%) scale(1);
+    transition: all 0.2s;
+}
+/*tool tip arrow below box*/
+.resetButton::after{
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -1rem;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    transform-origin: top center;
+    transition: all 0.2s;
+    border: 1rem solid transparent;
+    border-top: 1rem solid var(--tooltip-color);
 }
 .grid{
     width: 45rem;
@@ -89,6 +127,7 @@ input:focus{
 .end input:focus{
     border:none;
 }
+
 @media only screen and (max-width: 450px){
     body{
         height: 100vh;
@@ -102,7 +141,7 @@ input:focus{
         right: 0.5rem;
         height: 3rem;
     }
-    input{
+    .resetButton{
         width: 3rem;
         height: 3rem;
         padding: 1rem;
