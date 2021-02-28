@@ -15,7 +15,6 @@ body{
     right: 4rem;
     width: 4rem;
     height: 4rem;
-    opacity: 1;
     background-image: url("reset.png");
     background-size: 100%;
     cursor: pointer;
