@@ -23,38 +23,38 @@ function gridClicked(row,column){
         localStorage.setItem("count", ++count)
 
     }
-    grid = generateGrid()
-    checkIfWon(row,column,grid)
+    array = generateGrid()
+    checkIfWon(row,column,array)
 }
 
 function generateGrid(){
-    grid = []
+    array = []
     for (let i = 0; i < 3; i++){
         temp = []
         for (let x = 0; x < 3; x++){
             temp.push(document.getElementById(i+""+x).innerHTML)
         }
-        grid.push(temp)
+        array.push(temp)
     }
-    console.log(grid)
-    return grid
+    ////console.log(array)
+    return array
 }
-function checkIfWon(row,column,grid){
+function checkIfWon(row,column,array){
     rowCheck = true
     columnCheck = true
     diagonalCheck = true
 
-    console.log("Row: " + row + " Column: " + column)
+    //console.log("Row: " + row + " Column: " + column)
     //check if all items in row are the same
-    for (let i = 0; i < grid.length-1; i++){
-        if(grid[row][i] != grid[row][i+1]){
+    for (let i = 0; i < array.length-1; i++){
+        if(array[row][i] != array[row][i+1]){
             rowCheck = false
             break
         }
     }
 
     if (rowCheck == true){
-        console.log("row win")
+        //console.log("row win")
         document.getElementById("grid").style.pointerEvents = "none"
         end()
         return
@@ -62,33 +62,33 @@ function checkIfWon(row,column,grid){
 
     //check if all items in column are the same
     temp = []
-    for (let i = 0; i < grid.length; i++){
-        temp.push(grid[i][column])
+    for (let i = 0; i < array.length; i++){
+        temp.push(array[i][column])
     }
     for (let i = 0; i < temp.length-1; i++){
-        if(grid[i][column] != grid[i+1][column]){
+        if(array[i][column] != array[i+1][column]){
             columnCheck = false
             break
         }
     }
     
     if (columnCheck == true){
-        console.log("column win")
+        //console.log("column win")
         document.getElementById("grid").style.pointerEvents = "none"
         end()
         return
     }
 
     //check diagonals
-    for (let i = 0; i < grid.length - 1; i++){
-        if (grid[i][i] != grid[i+1][i+1] || grid[i][i] == ""){
+    for (let i = 0; i < array.length - 1; i++){
+        if (array[i][i] != array[i+1][i+1] || array[i][i] == ""){
             diagonalCheck = false
             break
         }
     }
 
     if (diagonalCheck == true){
-        console.log("left diag win")
+        //console.log("left diag win")
         document.getElementById("grid").style.pointerEvents = "none"
         end()
         return
@@ -97,16 +97,16 @@ function checkIfWon(row,column,grid){
     diagonalCheck=true
 
     //check diagonals
-    ptr = grid.length - 1
-    for (let i = 0; i < grid.length - 1; i++){
-        if (grid[i][ptr] != grid[i+1][ptr-1] || grid[i][ptr] == ""){
+    ptr = array.length - 1
+    for (let i = 0; i < array.length - 1; i++){
+        if (array[i][ptr] != array[i+1][ptr-1] || array[i][ptr] == ""){
             diagonalCheck = false
             break
         }
         ptr -= 1
     }
     if (diagonalCheck == true){
-        console.log("right diag win")
+        //console.log("right diag win")
         document.getElementById("grid").style.pointerEvents = "none"
         end()
         return
@@ -115,7 +115,7 @@ function checkIfWon(row,column,grid){
     //check for draw
     if(localStorage.getItem("count") == 9){
         document.getElementById("grid").style.pointerEvents = "none"
-        console.log("DRaw")
+        //console.log("DRaw")
         draw = true
         end()
     }
@@ -147,8 +147,8 @@ function resetGrid(){
     localStorage.setItem("count", 0)
     document.getElementById("end").style.transform = "scale(0)"
     document.getElementById("end").style.transition = "all 0.25s"
-    for (let i = 0; i < grid.length; i++){
-        for (let x = 0; x < grid.length; x++){
+    for (let i = 0; i < array.length; i++){
+        for (let x = 0; x < array.length; x++){
             id = i+""+x
             document.getElementById(id).innerHTML = ""
             document.getElementById(id).style.fontSize = "0rem"
