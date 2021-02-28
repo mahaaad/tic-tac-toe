@@ -27,7 +27,12 @@ function gridClicked(gridItem){
             player1 = true
         }
         sound.play()
-        gridItem.style.fontSize = "10rem"
+        if( /Android|webOS|iPhone|iPad|Mac|Macintosh|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            gridItem.style.fontSize = "4rem"
+        }
+        else{
+            gridItem.style.fontSize = "10rem"
+        }
         gridItem.style.transition = "font-size 0.2s"
 
         var count = localStorage.getItem("count") 
@@ -54,6 +59,7 @@ function generateGrid(){
     console.log(array)
     return array
 }
+
 function checkIfWon(row,column,array){
     rowCheck = true
     columnCheck = true
