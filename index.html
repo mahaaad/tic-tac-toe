@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic Tac Toe</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="connect4.js"></script>
+</head>
+<body>
+    <div class="buttons">
+        <input type="image" src="reset.png" onclick="resetGrid()">
+    </div>
+    <div class="grid" id="grid">
+        <div class="left-column">
+            <div class="grid-item" id="00" onclick="gridClicked('0','0')"></div>
+            <div class="grid-item mid-row" id="01" onclick="gridClicked('0','1')"></div>
+            <div class="grid-item" id="02" onclick="gridClicked('0','2')"></div>
+        </div>
+        <div class="mid-column">
+            <div class="grid-item" id="10" onclick="gridClicked('1','0')"></div>
+            <div class="grid-item mid-row" id="11" onclick="gridClicked('1','1')"></div>
+            <div class="grid-item" id="12" onclick="gridClicked('1','2')"></div>
+        </div>
+        <div class="right-column">
+            <div class="grid-item" id="20" onclick="gridClicked('2','0')"></div>
+            <div class="grid-item mid-row" id="21" onclick="gridClicked('2','1')"></div>
+            <div class="grid-item" id="22" onclick="gridClicked('2','2')"></div>
+        </div>
+    </div>
+
+    <div class="end" id="end">
+        <h1 id="end-text"></h1>
+        <input type="button" value="Play again" onclick="resetGrid()">
+    <script src="tictactoe.js"></script>
+</body>
+</html>
